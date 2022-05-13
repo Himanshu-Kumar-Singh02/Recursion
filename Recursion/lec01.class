@@ -1,0 +1,37 @@
+import java.io.*;
+	import java.util.*;
+
+	public class Main {
+
+	    public static void main(String[] args) throws Exception {
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int ans = printPaths(0,0,n-1,m-1,"");
+            System.out.println(ans);
+	    }
+	    
+        static int dir[][]={{0,1},{1,1},{1,0}};
+        static String drN[]={"h","d","v"};
+        
+	  public static int printPaths(int sr, int sc, int dr, int dc, String psf){
+	      if(sr==dr&&sc==dc){
+	          System.out.println(psf);
+	          return 1;
+	      }
+	      
+	      int count=0;
+	      for(int d=0;d<dir.length;d++){
+	          for(int jump=1;jump<=(int)Math.max(dr,dc);jump++){
+	          int newr = sr+(jump*dir[d][0]);
+	          int newc = sc+(jump*dir[d][1]);
+	          if(newr<=dr&&newc<=dc){
+	             count+=printPaths(newr,newc,dr,dc,psf+drN[d]+jump); 
+	          }
+	         }
+	      }
+	      return count;
+	  }
+
+
+	}
